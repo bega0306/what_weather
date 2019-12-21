@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import axios from 'axios';
+import './Weather.css';
+import Loader from './Loader';
     
 const APP_Key = "53ff36a516736f2588021c40dc49e1e8";
 
@@ -23,14 +25,24 @@ class Weather extends React.Component {
 
     getWeather = async () => {
         try {
-            console.log(1);
             const {coords} = await getCurrentPosition();
             const {data} = await axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${coords.latitude}&lon=${coords.longitude}&APPID=${APP_Key}`);
-            console.log(data.coord.lat + ", " + data.coord.lon);
-            this.setState({waether: data.weather[0].main});
+            this.setState({isLoading: false, waether: data.weather[0].main});
         } catch (error) {
-            console.log(error);
-            this.setState({isLoading: false, isGeoError: true});
+            let errorMsg = "";
+            switch (error.code) {
+                case 1:
+                    errorMsg = "위치 정보 권한을 허락해주세요!";
+                    break;
+                case 2:
+                    errorMsg = "위치 확인이 불가능해요...";
+                    break;
+                default:
+                    console.log(error.code);
+                    errorMsg = "문제 발생!";
+                    break;
+            }
+            this.setState({isLoading: false, isGeoError: true, errorMsg});
         }
     }
 
@@ -39,10 +51,24 @@ class Weather extends React.Component {
     }
 
     render() {
-        const {waether} = this.state;
-        return(
-            <h4>{waether}</h4>
-        );
+        const {isLoading, isGeoError, waether} = this.state;
+        if(isLoading) {
+            return(<Loader active="on"></Loader>);
+        }else if(isGeoError) {
+            return (
+                <Fragment>
+                    <Loader active="off"></Loader>
+                    <h4>{this.state.errorMsg}</h4>
+                </Fragment>
+            )
+        }else {
+            return(
+                <Fragment>
+                    <Loader active="off"></Loader>
+                    <h4>{waether}</h4>
+                </Fragment>
+            );
+        }
     }
 }
 
