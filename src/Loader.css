@@ -1,4 +1,6 @@
 #fixed_loading_panel {
+    background-color: #282c34;
+    color: white;
     padding: 0;
     margin: 0;
     position: fixed;
@@ -48,8 +50,8 @@
     left: 50%;
     margin-top: -100px;
     margin-left: -100px;
-    width: 200px;
-    height: 200px;
+    width: 250px;
+    height: 250px;
     transform-origin: 50% 50%;
     animation: spinReturn 4s ease infinite;
 }

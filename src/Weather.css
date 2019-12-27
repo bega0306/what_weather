@@ -1,0 +1,147 @@
+:root {
+    --pri-color: white;
+}
+
+.errorMsg {
+    font-family: 'Jua', sans-serif;
+}
+
+.weather_bg {
+    z-index: -2;
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-size: 500% 500%;
+    animation: AnimGradient 60s linear infinite;
+    opacity: 0;
+}
+
+.weather_bg.last {
+    animation-delay: 30s;
+}
+
+[background="Clear"] {
+    background-image: linear-gradient(to bottom right, #cbecf3, #acdbeb, #d8eaee, #f9fbfa, #7eaec6);
+}
+
+[background="Haze"] {
+    background-image: linear-gradient(to bottom right, #f7bdb2, #f4dcc8, #d0e3e8, #9aa7ba, #9087af);
+}
+
+[background="Clouds"] {
+    background-image: linear-gradient(to bottom right, #ffffff, #cff9ff, #c0d7ff, #979eff, #c0d7ff);
+}
+
+[background="Mist"] {
+    background-image: linear-gradient(to bottom right, #c5e0ff, #aeb9e8, #9c97d1, #9682ba, #aeb9e8);
+}
+
+[background="Fog"] {
+    background-image: linear-gradient(to bottom right, #8296c0, #93a4c9, #a5afd2, #b7bfdb, #c9cfe4);
+}
+
+[background="Thunderstorm"] {
+    background-image: linear-gradient(to bottom right, #323138, #5e6469, #5b4085, #fff975, #7f96a7);
+}
+
+[background="Drizzle"] {
+    background-image: linear-gradient(to bottom right, #ffd69c, #db6f02, #ff9624, #ffb825, #ffd69c);
+}
+
+[background="Rain"] {
+    background-image: linear-gradient(to bottom right, #bfcdcc, #dcd3c3, #cbd9d8, #e8e4dc, #f6f6f3);
+}
+
+[background="Snow"] {
+    background-image: linear-gradient(to bottom right, #e1f4f4, #dce8f9, #d5d7f9, #d6cdff, #c0e6ed);
+}
+
+[background="Smoke"] {
+    background-image: linear-gradient(to bottom right, #9ba396, #988383, #809092, #94878d, #787a6e);
+}
+
+[background="Dust"] {
+    background-image: linear-gradient(to bottom right, #8f7680, #9e8d9f, #9dae9b, #7d92a5, #605863);
+}
+
+[background="Ash"] {
+    background-image: linear-gradient(to bottom right, #ab9582, #917d77, #7d6a6f, #695867, #5c4c62);
+}
+
+[background="Squall"] {
+    background-image: linear-gradient(to bottom right, #010326, #ACC3F2, #365073, #6581A6, #C2D7F2);
+}
+
+[background="Tornado"] {
+    background-image: linear-gradient(to bottom right, #4ed2ff, #3c77b5, #606c93, #6d5b9d, #2096d7);
+}
+
+[background="Sand"] {
+    background-image: linear-gradient(to bottom right, #b8a388, #e7d1b5, #d8c2a6, #ccb598, #b8a388);
+}
+
+@keyframes AnimGradient {
+    0%{
+        background-position:0% 0%;
+        opacity: 0;
+        z-index: -2;
+    }
+    5%{
+        opacity: 1;
+    }
+    50%{
+        background-position:100% 100%;
+        opacity: 1;
+        z-index: -3;
+    }
+    60%{
+        opacity: 0;
+    }
+    100%{
+        background-position:0% 0%;
+        opacity: 0;
+    }
+}
+
+#weather_card {
+    font-weight: 400;
+    font-family: 'East Sea Dokdo', cursive;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: var(--pri-color);
+    box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.1);
+    border: white 4px solid;
+    width: 500px;
+    height: 500px;
+    margin: auto;
+}
+
+#weather_card .temp {
+    font-size: 100px;
+    margin: 0;
+    margin-top: 100px;
+}
+
+#weather_card .card_line {
+    max-width: 40%;
+    margin: 20px auto;
+    border-bottom: white 4px dashed;
+}
+
+#weather_card .main {
+    font-size: 40px;
+    margin: 0;
+    margin-top: 30px;
+}
+
+#weather_card .location {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    font-size: 25px;
+    margin: 0;
+}

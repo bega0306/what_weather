@@ -19,15 +19,23 @@ class Weather extends React.Component {
         this.state = {
             isLoading: true,
             isGeoError: false,
-            waether: ""
+            weather: {},
+            main: {},
+            wind: {},
+            locationName: ""
         }
     }
 
     getWeather = async () => {
         try {
             const {coords} = await getCurrentPosition();
-            const {data} = await axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${coords.latitude}&lon=${coords.longitude}&APPID=${APP_Key}`);
-            this.setState({isLoading: false, waether: data.weather[0].main});
+            const {data} = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${coords.latitude}&lon=${coords.longitude}&APPID=${APP_Key}&lang=kr&units=metric`);
+            this.setState({
+                isLoading: false,
+                weather: data.weather[0],
+                locationName: data.name,
+                main: data.main
+            });
         } catch (error) {
             let errorMsg = "";
             switch (error.code) {
@@ -51,21 +59,30 @@ class Weather extends React.Component {
     }
 
     render() {
-        const {isLoading, isGeoError, waether} = this.state;
+        const {isLoading, isGeoError, weather, main, locationName} = this.state;
+
         if(isLoading) {
-            return(<Loader active="on"></Loader>);
+            return(<Loader active="on" msg="이 사이트는 사용자의 위치 정보를 사용합니다!"></Loader>);
         }else if(isGeoError) {
             return (
                 <Fragment>
-                    <Loader active="off"></Loader>
-                    <h4>{this.state.errorMsg}</h4>
+                    <Loader active="off" msg="에러..!"></Loader>
+                    <p className="errorMsg">{this.state.errorMsg}</p>
                 </Fragment>
             )
         }else {
             return(
                 <Fragment>
-                    <Loader active="off"></Loader>
-                    <h4>{waether}</h4>
+                    <Loader active="off" msg="로딩 완료!"></Loader>
+                    <div className="weather_bg_ef" value={weather.main}></div>
+                    <div className="weather_bg" background={weather.main}></div>
+                    <div className="weather_bg last" background={weather.main}></div>
+                    <div id="weather_card">
+                        <p className="temp">{main.temp}°</p>
+                        <div className="card_line"></div>
+                        <p className="main">{weather.description}({weather.main})</p>
+                        <p className="location">{locationName}</p>
+                    </div>
                 </Fragment>
             );
         }
