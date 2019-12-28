@@ -81,6 +81,7 @@ class Weather extends React.Component {
                         <p className="temp">{main.temp}°</p>
                         <div className="card_line"></div>
                         <p className="main">{weather.description}({weather.main})</p>
+                        <img className="icon" src={require(`./images/${weather.main}.png`)} alt={weather.main}/>
                         <p className="location">{locationName}</p>
                     </div>
                 </Fragment>
