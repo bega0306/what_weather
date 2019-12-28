@@ -149,3 +149,13 @@
     font-size: 25px;
     margin: 0;
 }
+
+@media all and (max-width: 550px) {
+    #root{
+        width: 80%;
+    }
+
+    #weather_card {
+        width: 100%;
+    }
+}

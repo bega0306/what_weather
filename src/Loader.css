@@ -48,8 +48,8 @@
     position: fixed;
     top: 50%;
     left: 50%;
-    margin-top: -100px;
-    margin-left: -100px;
+    margin-top: -125px;
+    margin-left: -125px;
     width: 250px;
     height: 250px;
     transform-origin: 50% 50%;
@@ -108,5 +108,48 @@
     }
     100% {
         transform: rotate(360deg);
+    }
+}
+
+@media all and (max-width: 960px) {
+    .loading_msg {
+        font-size: 150px;
+    }
+        
+    .loader-square .loader {
+        margin-top: -100px;
+        margin-left: -100px;
+        width: 200px;
+        height: 200px;
+    }
+}
+
+@media all and (max-width: 720px) {
+    .loading_msg {
+        font-size: 100px;
+    }
+        
+    .loader-square .loader {
+        margin-top: -75px;
+        margin-left: -75px;
+        width: 150px;
+        height: 150px;
+    }
+}
+
+@media all and (max-width: 560px) {
+    .loading_msg {
+        font-size: 50px;
+    }
+        
+    .loader-square .loader {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+@media all and (max-height: 720px) {
+    #fixed_loading_panel > p {
+        bottom: 50px;
     }
 }
